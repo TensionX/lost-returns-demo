@@ -26,7 +26,7 @@
             loading.style.display = 'block';
             description.value = '';
 
-            var response = await fetch('http://localhost:3000/analyze-image', {
+            var response = await fetch('https://lost-returns-d6ef5d622f73.herokuapp.com/analyze-image', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
