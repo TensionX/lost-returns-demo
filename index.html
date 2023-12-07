@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lost Returns AI Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="header">Lost Returns AI Demo</h1>
+        <div class="input-group">
+            <label for="imageUrl" class="input-label">Image URL:</label>
+            <input type="text" id="imageUrl" class="input-field" placeholder="Enter Image URL">
+            <button class="btn" onclick="generateDescription()">Generate Description</button>
+        </div>
+        <div id="loading" class="loading">Generating description, this can take up to 30 seconds...</div>
+        <textarea id="description" class="textarea" rows="10" cols="50" placeholder="Description will appear here..."></textarea>
+    </div>
+
+    <script>
+        async function generateDescription() {
+            var imageUrl = document.getElementById('imageUrl').value;
+            var loading = document.getElementById('loading');
+            var description = document.getElementById('description');
+
+            // Placeholder for the backend call
+            loading.style.display = 'block';
+            description.value = '';
+
+            var response = await fetch('http://localhost:3000/analyze-image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ image: imageUrl })
+            });
+            response = await response.json();
+
+            loading.style.display = 'none';
+            description.value = JSON.stringify(response); // Placeholder response
+        }
+    </script>
+</body>
+</html>
